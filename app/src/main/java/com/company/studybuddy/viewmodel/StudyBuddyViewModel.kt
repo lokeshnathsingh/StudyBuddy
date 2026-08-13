@@ -35,7 +35,7 @@ class StudyBuddyViewModel : ViewModel() {
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     private val generativeModel = GenerativeModel(
-        modelName = "gemini-1.5-flash",
+        modelName = "gemini-3-flash",
         apiKey = BuildConfig.GEMINI_API_KEY,
         systemInstruction = content {
             text("You are an expert Study Buddy. Always format your responses using standard Markdown. NEVER use LaTeX (like ->) for formatting, arrows, or math. Instead, use standard Unicode symbols like '→' and normal text.")
