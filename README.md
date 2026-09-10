@@ -1,32 +1,56 @@
 # StudyBuddy
 
-An Android study companion app built to help students stay organized — manage notes, reminders, and study tasks in one place, powered by an AI assistant.
+An AI-powered study companion Android app — chat with an AI assistant, upload documents for context, and keep a history of past study sessions. Built with Kotlin and Jetpack Compose, backed by Firebase.
 
 ## ✨ Features
 
-- 🤖 AI-powered study assistant to answer questions and help with revision
-- 📝 Create and organize study notes
-- ⏰ Reminders for assignments, tests, and study sessions
-- ☁️ Cloud sync via Firebase (auth, storage/Firestore)
-- 🎨 Modern UI built entirely with Jetpack Compose
+- 🤖 AI chat assistant for study help (`ChatScreen`, `ChatMessage`)
+- 📄 Document upload for context-aware answers (`DocumentUploader`)
+- 🕘 Chat history view to revisit past sessions (`HistoryScreen`)
+- 🔐 Authentication flow — sign up / log in (`AuthScreens`, `AuthViewModel`)
+- 🎨 Fully declarative UI built with Jetpack Compose
 
 ## 🛠️ Tech Stack
 
-- **Language:** Kotlin
-- **UI:** Jetpack Compose
-- **Backend/Cloud:** Firebase (Google Services)
-- **Architecture:** MVVM / Clean Architecture
-- **Build System:** Gradle (Kotlin DSL)
+| Category | Tech |
+|---|---|
+| Language | Kotlin |
+| UI | Jetpack Compose |
+| Backend/Cloud | Firebase (Google Services) |
+| Architecture | MVVM (ViewModel + Compose state) |
+| Build system | Gradle (Kotlin DSL) |
 
 ## 📂 Project Structure
 
 ```
 StudyBuddy/
-├── app/                    # Main application module
-│   ├── src/main/java/...   # Kotlin source (UI, ViewModels, data layer)
-│   └── src/main/res/       # Compose themes, resources
-├── gradle/                 # Gradle wrapper & version catalog
-├── build.gradle.kts        # Top-level build config
+├── app/
+│   ├── google-services.json                       # Firebase config (per-project, keep private)
+│   ├── build.gradle.kts                            # App-level dependencies & config
+│   └── src/
+│       ├── main/
+│       │   ├── AndroidManifest.xml
+│       │   └── java/com/company/studybuddy/
+│       │       ├── MainActivity.kt                 # App entry point, sets Compose content
+│       │       ├── data/
+│       │       │   └── DocumentUploader.kt          # Handles uploading study documents
+│       │       ├── model/
+│       │       │   └── ChatMessage.kt               # Chat message data model
+│       │       ├── viewmodel/
+│       │       │   ├── AuthViewModel.kt              # Auth state & login/signup logic
+│       │       │   └── StudyBuddyViewModel.kt         # Core chat/session state
+│       │       └── ui/theme/
+│       │           ├── AuthScreens.kt                # Login / signup composables
+│       │           ├── ChatScreen.kt                 # Main chat UI
+│       │           ├── HistoryScreen.kt              # Past chat sessions
+│       │           ├── Color.kt                      # Compose color palette
+│       │           ├── Theme.kt                      # Compose theme setup
+│       │           └── Type.kt                       # Typography
+│       ├── androidTest/                             # Instrumented tests
+│       └── test/                                    # Unit tests
+├── gradle/
+│   └── libs.versions.toml                          # Version catalog
+├── build.gradle.kts                                 # Top-level build config
 └── settings.gradle.kts
 ```
 
@@ -36,7 +60,7 @@ StudyBuddy/
 
 - Android Studio (latest stable)
 - JDK 17+
-- A Firebase project (add your `google-services.json` to `app/`)
+- A Firebase project with **Authentication** enabled (and Firestore/Storage if you're persisting chats/documents)
 
 ### Setup
 
@@ -46,9 +70,10 @@ cd StudyBuddy
 ```
 
 1. Open the project in Android Studio.
-2. Add your own `google-services.json` file to the `app/` directory (get it from the [Firebase Console](https://console.firebase.google.com/)).
-3. Sync Gradle.
-4. Run on an emulator or physical device.
+2. Create a Firebase project at the [Firebase Console](https://console.firebase.google.com/) and register the app with package name `com.company.studybuddy`.
+3. Download your own `google-services.json` and place it in `app/` (replace the sample one — don't commit real Firebase keys to a public repo).
+4. Sync Gradle.
+5. Run on an emulator or physical device.
 
 ### CLI Build
 
@@ -56,9 +81,11 @@ cd StudyBuddy
 ./gradlew assembleDebug
 ```
 
+> ⚠️ **Security note:** a real `google-services.json` appears to be committed under `app/`. Rotate/restrict those Firebase API keys and add `app/google-services.json` to `.gitignore` if this repo is public.
+
 ## 🗺️ Roadmap
 
-- [ ] Chat-based AI assistant integration
+- [ ] Reminders for assignments & study sessions
 - [ ] Expense tracking module
 - [ ] Study planner / calendar view
 - [ ] Offline-first support with Room
