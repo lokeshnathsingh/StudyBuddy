@@ -10,6 +10,11 @@ An AI-powered study companion Android app — chat with an AI assistant, upload 
 - 🔐 Authentication flow — sign up / log in (`AuthScreens`, `AuthViewModel`)
 - 🎨 Fully declarative UI built with Jetpack Compose
 
+mkdir -p docs/screenshots
+mv Screenshot_20261101-111811.jpg docs/screenshots/login.jpg
+mv Screenshot_20261101-111841.jpg docs/screenshots/document_upload.jpg
+mv Screenshot_20261101-112609.jpg docs/screenshots/ai_summary.jpg
+
 ## 🛠️ Tech Stack
 
 | Category | Tech |
