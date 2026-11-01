@@ -26,7 +26,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // 2. ADDED: Expose the keys to the app via BuildConfig
         buildConfigField("String", "GEMINI_API_KEY", localProperties.getProperty("GEMINI_API_KEY") ?: "\"\"")
         buildConfigField("String", "WEB_CLIENT_ID", localProperties.getProperty("WEB_CLIENT_ID") ?: "\"\"")
     }
@@ -46,7 +45,6 @@ android {
     }
     buildFeatures {
         compose = true
-        // 3. ADDED: Enable the BuildConfig feature
         buildConfig = true
     }
 }
